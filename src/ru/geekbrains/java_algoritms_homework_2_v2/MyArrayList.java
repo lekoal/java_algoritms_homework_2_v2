@@ -2,6 +2,7 @@ package ru.geekbrains.java_algoritms_homework_2_v2;
 
 public class MyArrayList<T extends Comparable<T>> {
     private T[] list;
+    private T[] temp;
     private int size;
     private final int DEFAULT_CAPACITY = 10;
 
@@ -17,13 +18,13 @@ public class MyArrayList<T extends Comparable<T>> {
     }
 
     public void add(T item) {
-        //check size
+        if (size >= list.length) throw new IllegalArgumentException("array size cant be larger then length");
         list[size] = item;
         size++;
     }
 
     public void add(int index, T item) {
-        //check size
+        if (size >= list.length) throw new IllegalArgumentException("array size cant be larger then length");
         if (index < 0 || index > list.length - 1) throw new IllegalArgumentException("wrong index size. It cant be <= 0 or > array size");
         for (int i = size; i > index; i--) {
             list[i] = list[i - 1];
@@ -99,7 +100,7 @@ public class MyArrayList<T extends Comparable<T>> {
     }
 
     public void selectionSort() {
-        long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis(); // счётчик времени выполнения метода
         int iMin;
         for (int i = 0; i < size - 1; i++) {
             iMin = i;
@@ -111,7 +112,7 @@ public class MyArrayList<T extends Comparable<T>> {
             swap(i, iMin);
         }
         long stopTime = System.currentTimeMillis();
-        System.out.println("Selection sort execution time: " + (stopTime - startTime) + "ms");
+        System.out.println("Selection sort execution time: " + (stopTime - startTime) + "ms"); // вывод времени выполнения метода в консоль
     }
 
     public void insertionSort() {
@@ -162,10 +163,28 @@ public class MyArrayList<T extends Comparable<T>> {
         System.out.println("Bubble optimized sort execution time: " + (stopTime - startTime) + "ms");
     }
 
-    public void arrClone(MyArrayList<Integer> arr1, MyArrayList<Integer> arr2) {
-        for (int i = 0; i < arr1.size(); i++) {
+    public void arrClone(MyArrayList<Integer> arr1, MyArrayList<Integer> arr2) { // метод клонирования массива
+        for (int i = 0; i < arr1.size() - 1; i++) {
             arr2.add(i, arr1.get(i));
         }
+    }
+
+    public void checkSize() { // метод проверки размера массива
+        System.out.println("array size is: " + list.length);
+    }
+
+    public void enlargeArray() { // метод увеличения массива в 1,5 + 1 раз
+
+        temp = (T[]) new Comparable[(int)(list.length * 1.5 + 1)];
+        for (int i = 0; i < list.length; i++) {
+            temp[i] = list[i];
+        }
+        double capacity = (temp.length * 1.5 + 1) - temp.length;
+        for (int i = temp.length; i < (int) capacity; i++) {
+            size++;
+            temp[i] = null;
+        }
+        list = temp;
     }
 
 }
