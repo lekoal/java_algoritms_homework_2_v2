@@ -78,7 +78,7 @@ public class Main {
 //        System.out.println(msal);
 //        System.out.println(msal.binaryFind(7));
 
-        int n = 100;
+        int n = 100000;
         Random random = new Random();
         MyArrayList<Integer> mal = new MyArrayList<>(n);
         for (int i = 0; i < n; i++) {
@@ -88,13 +88,13 @@ public class Main {
         temp.arrClone(mal, temp); // Клонирование массива
 
 //        System.out.println(temp);
-//        temp.selectionSort();
-//        temp.arrClone(mal, temp);
-//        temp.insertionSort();
-//        temp.arrClone(mal, temp);
-//        temp.bubbleSort();
-//        temp.arrClone(mal, temp);
-//        temp.bubbleSortOptimized();
+        temp.selectionSort();
+        temp.arrClone(mal, temp);
+        temp.insertionSort();
+        temp.arrClone(mal, temp);
+        temp.bubbleSort();
+        temp.arrClone(mal, temp);
+        temp.bubbleSortOptimized();
 //        System.out.println(temp);
         temp.checkSize(); // проверка размера массива
         System.out.println(temp);
