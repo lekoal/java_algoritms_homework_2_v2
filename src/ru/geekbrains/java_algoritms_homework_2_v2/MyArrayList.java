@@ -18,13 +18,13 @@ public class MyArrayList<T extends Comparable<T>> {
     }
 
     public void add(T item) {
-        if (size >= list.length) throw new IllegalArgumentException("array size cant be larger then length");
+        if (size >= list.length) enlargeArray(); // проверка достижения максимума текущего размера и увеличение размера массива
         list[size] = item;
         size++;
     }
 
     public void add(int index, T item) {
-        if (size >= list.length) throw new IllegalArgumentException("array size cant be larger then length");
+        if (size >= list.length) enlargeArray();
         if (index < 0 || index > list.length - 1) throw new IllegalArgumentException("wrong index size. It cant be <= 0 or > array size");
         for (int i = size; i > index; i--) {
             list[i] = list[i - 1];
